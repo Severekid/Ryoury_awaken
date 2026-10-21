@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  background: #1a1a1a;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background: #1a1a1a;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h1 {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.logo p {
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 28px;
+  font-size: 14px;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+/* Cards container */
+.cards {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+/* Single card */
+.card {
+  flex: 1;
+  padding: 40px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card:hover
+
+.card-uzbek  { background-image: url('../images/uzbekistan/uz.svg');background-repeat: no-repeat;  background-size: cover;}
+.card-spain  { background-image: url('../images/spain/es.svg'); background-repeat: no-repeat; background-size: cover;}
+.card-russia { background-image: url('../images/russia/ru.svg'); background-repeat: no-repeat;  background-size: cover;}
+
+.card-country {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.card-title {
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.card-uzbek  .card-title { color: #8b1a1a; }
+.card-spain  .card-title { color: #5a4000; }
+.card-russia .card-title { color: #1a2a4a; }
+
+.card-subtitle {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+/* Photo */
+.card-photo {
+  width: 100%;
+  flex: 1;
+  object-fit: cover;
+  display: block;
+  min-height: 300px;
+  max-height: 420px;
+}
+
+/* Bottom row */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.card-btn {
+  border: 1px solid rgba(255,255,255,0.6);
+  background: transparent;
+  color: white;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.card-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.card-nav {
+  font-size: 13px;
+  opacity: 0.8;
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uch bayroq — til tanlash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #11161d;
+    --surface: #1a2129;
+    --surface-2: #212a33;
+    --text: #f2ede2;
+    --text-dim: #9aa5ae;
+    --gold: #d4a24c;
+    --uz: #0099b5;
+    --es: #c8102e;
+    --ru: #2a52a8;
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    overflow-x:hidden;
+    position:relative;
+    padding: 40px 20px;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0,153,181,0.10), transparent 40%),
+      radial-gradient(circle at 50% 10%, rgba(200,16,46,0.10), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(42,82,168,0.10), transparent 40%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 46px);
+    text-align:center;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  p.sub{
+    color: var(--text-dim);
+    text-align:center;
+    max-width: 480px;
+    margin-bottom: 56px;
+    font-size: 15px;
+    line-height:1.5;
+  }
+  .flags{
+    display:flex;
+    gap: 36px;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    justify-content:center;
+    z-index:1;
+  }
+  .country{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .flag-btn{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid var(--surface-2);
+    background: var(--surface);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 56px;
+    cursor:pointer;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .flag-btn:hover{
+    transform: translateY(-6px);
+  }
+  .country[data-c="uz"] .flag-btn:hover{ border-color: var(--uz); box-shadow: 0 12px 30px rgba(0,153,181,0.25);}
+  .country[data-c="es"] .flag-btn:hover{ border-color: var(--es); box-shadow: 0 12px 30px rgba(200,16,46,0.25);}
+  .country[data-c="ru"] .flag-btn:hover{ border-color: var(--ru); box-shadow: 0 12px 30px rgba(42,82,168,0.25);}
+  .country.active .flag-btn{ transform: translateY(-6px) scale(1.03); }
+  .country[data-c="uz"].active .flag-btn{ border-color: var(--uz); box-shadow: 0 12px 30px rgba(0,153,181,0.35);}
+  .country[data-c="es"].active .flag-btn{ border-color: var(--es); box-shadow: 0 12px 30px rgba(200,16,46,0.35);}
+  .country[data-c="ru"].active .flag-btn{ border-color: var(--ru); box-shadow: 0 12px 30px rgba(42,82,168,0.35);}
+
+  .name{
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .menu{
+    margin-top: 18px;
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: var(--radius);
+    width: 190px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height .35s ease, opacity .3s ease, transform .3s ease;
+  }
+  .country.active .menu{
+    max-height: 260px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .menu a{
+    display:block;
+    padding: 13px 20px;
+    color: var(--text);
+    text-decoration:none;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--surface-2);
+    transition: background .2s ease, padding-left .2s ease;
+  }
+  .menu a:last-child{ border-bottom:none; }
+  .menu a:hover{ padding-left: 26px; }
+  .country[data-c="uz"] .menu a:hover{ background: rgba(0,153,181,0.12); color:#5fd6ea;}
+  .country[data-c="es"] .menu a:hover{ background: rgba(200,16,46,0.12); color:#ff7b8f;}
+  .country[data-c="ru"] .menu a:hover{ background: rgba(42,82,168,0.12); color:#8fb0ff;}
+
+  footer{
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align:center;
+    z-index:1;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow">Tilni tanlang</div>
+  <h1>Bayroqni bosing, menyu ochiladi</h1>
+  <p class="sub">Uchta davlat — uchta bayroq. Har birini bosing, o'sha davlatga mos menyu pastda chiqadi.</p>
+
+  <div class="flags">
+
+    <div class="country" data-c="uz">
+      <button class="flag-btn" onclick="toggleCountry('uz')">🇺🇿</button>
+      <div class="name">O'zbekiston</div>
+      <nav class="menu">
+        <a href="#">Bosh sahifa</a>
+        <a href="#">Xizmatlar</a>
+        <a href="#">Loyihalar</a>
+        <a href="#">Biz haqimizda</a>
+        <a href="#">Aloqa</a>
+      </nav>
+    </div>
+
+    <div class="country" data-c="es">
+      <button class="flag-btn" onclick="toggleCountry('es')">🇪🇸</button>
+      <div class="name">España</div>
+      <nav class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Servicios</a>
+        <a href="#">Proyectos</a>
+        <a href="#">Nosotros</a>
+        <a href="#">Contacto</a>
+      </nav>
+    </div>
+
+    <div class="country" data-c="ru">
+      <button class="flag-btn" onclick="toggleCountry('ru')">🇷🇺</button>
+      <div class="name">Россия</div>
+      <nav class="menu">
+        <a href="#">Главная</a>
+        <a href="#">Услуги</a>
+        <a href="#">Проекты</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+      </nav>
+    </div>
+
+  </div>
+
+  <footer>Istalgan bayroqni bosib ko'ring — menyu shu davlat tilida ochiladi.</footer>
+
+<script>
+  function toggleCountry(code){
+    document.querySelectorAll('.country').forEach(el => {
+      if(el.dataset.c === code){
+        el.classList.toggle('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

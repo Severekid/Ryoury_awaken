@@ -1,0 +1,100 @@
+body{
+    background: #222a36;
+    color: #f2ede2;
+    font-family: 'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+    position:relative;
+    padding: 40px 20px;
+}
+
+.title{
+    text-transform: uppercase;
+    color: #d4a24c;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+h1{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 46px);
+    text-align:center;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+p.sub{
+    color: var(--text-dim);
+    text-align:center;
+    max-width: 480px;
+    margin-bottom: 56px;
+    font-size: 15px;
+    line-height:1.5;
+}
+.flags{
+    display:flex;
+    gap: 36px;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    justify-content:center;
+    z-index:1;
+}
+.country{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.flag-btn{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid #1a2129;
+    background: #212a33;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 56px;
+    cursor:pointer;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    position:relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.flag-btn:hover{
+    transform: translateY(-6px);
+}
+
+#uzbekistan-btn:hover{
+    border-color: #0099b5;
+    box-shadow: 0 12px 30px rgba(0,153,181,0.25);
+}
+#spain-btn:hover{
+    border-color: #c8102e;
+    box-shadow: 0 12px 30px rgba(200,16,46,0.25);
+}
+#russia-btn:hover{
+    border-color: #2a52a8;
+    box-shadow: 0 12px 30px rgba(42,82,168,0.25);
+}
+
+ .menu{
+    margin-top: 18px;
+    background: #1a2129;
+    border: 1px solid #212a33;
+    border-radius: 18px;
+    width: 190px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height .35s ease, opacity .3s ease, transform .3s ease;
+}
+.country.active .menu{
+    max-height: 260px;
+    opacity: 1;
+    transform: translateY(0);
+}
