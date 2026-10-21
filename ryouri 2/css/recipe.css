@@ -2,7 +2,11 @@
 
 body {
   font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: var(--country-background);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   color: var(--text);
 }
 
@@ -182,3 +186,46 @@ body {
 }
 
 .back:hover { background: rgba(0,0,0,0.08); }
+
+/* Shared navigation and country background. */
+html { scroll-padding-top: 84px; }
+.recipe-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  min-height: 64px;
+  padding: 0 48px;
+  background: #202935;
+  border-bottom: 1px solid #d7b67a55;
+  color: #f1eddf;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+}
+.recipe-nav a {
+  padding: 21px 0 18px;
+  border-bottom: 2px solid transparent;
+  color: inherit;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-decoration: none;
+}
+.recipe-nav a:hover { color: #d7b67a; border-bottom-color: #d7b67a; }
+.recipe-nav a:focus-visible, .back:focus-visible { outline: 2px solid #d7b67a; outline-offset: 4px; }
+.recipe-page { max-width: 1160px; margin: 40px auto; background: rgba(var(--surface), .94); border: 1px solid rgba(255,255,255,.25); }
+@media (max-width: 1200px) { .recipe-page { margin: 24px; } .step-img-wrap { width: 42%; } }
+@media (max-width: 700px) {
+  .recipe-nav { padding: 0 22px; gap: 26px; }
+  .recipe-page { margin: 16px; }
+  .top { padding: 28px 22px; flex-direction: column; gap: 22px; }
+  .top-left h1 { font-size: 36px; }
+  .hero img { height: 300px; }
+  .content { padding: 0 22px 40px; }
+  .ingredients-grid { grid-template-columns: repeat(2, 1fr); gap: 0 12px; }
+  .step { flex-direction: column; gap: 20px; }
+  .step-num { font-size: 60px; }
+  .step-text, .step-even .step-text { padding: 0; }
+  .step-img-wrap { width: 100%; }
+  .step-img-wrap img { height: 260px; }
+}
